@@ -3,12 +3,10 @@
 var assert = require('../../helpers/assert');
 var GitUtils = require('../../../lib/utilities/git-utils');
 var MockProject = require('../../helpers/mock-project');
-var MockNestedProject = require('../../helpers/mock-nested-project');
 
 describe('git-utils', function() {
-    describe('undefined-git-root', function() {
+    describe('undefined git root', function() {
         var subject;
-        console.log(process.cwd());
         beforeEach(function() {
             subject = new GitUtils({
                 project: new MockProject()
@@ -32,7 +30,7 @@ describe('git-utils', function() {
         });
     });
 
-    describe('unspecified-git-root', function() {
+    describe('empty git root specified', function() {
         var subject;
 
         beforeEach(function() {
@@ -64,7 +62,9 @@ describe('git-utils', function() {
 
         beforeEach(function() {
             subject = new GitUtils({
-                project: new MockNestedProject(),
+                project: new MockProject({
+                  cwd: process.cwd() + '/tests'
+                }),
                 gitRoot: process.cwd()
             });
         });
